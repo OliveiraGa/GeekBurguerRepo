@@ -1,9 +1,17 @@
+using GeekBurguer.Dashboard;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+var startup = new Startup(builder.Configuration);
+
+startup.ConfigureServices(builder.Services);
+
 var app = builder.Build();
+
+startup.Configure(app, builder.Environment);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
